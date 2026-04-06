@@ -49,7 +49,6 @@ Ovdje će se prikazati cijena.
 <script>
 
 function getPrice() {
-  alert("klik radi");
 
   const start = document.getElementById("start").value;
   const end = document.getElementById("end").value;
@@ -59,8 +58,55 @@ function getPrice() {
     return;
   }
 
-  document.getElementById("result").innerHTML =
-    "Forma radi ✔ — sljedeći korak je povezivanje sa Google Sheet-om.";
+  const url = "https://opensheet.elk.sh/e/2PACX-1vQ5UNnbAnQYIILeUjzBBnKsxDB0D6n-cL81wIItdV3FzM1CZiKWi8edmCfrJwZIJussluoBoE1X_YMP/CIJENE";
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+
+      let totalEconomy = 0;
+      let totalStandard = 0;
+      let totalLasadu = 0;
+
+      let foundDays = 0;
+
+      data.forEach(row => {
+
+        const date = row["Datum"];
+
+        if (date >= start && date < end) {
+
+          if (row["Studio Economy Guesthouse"]) {
+            totalEconomy += parseFloat(row["Studio Economy Guesthouse"]);
+          }
+
+          if (row["Studio Standard Guesthouse"]) {
+            totalStandard += parseFloat(row["Studio Standard Guesthouse"]);
+          }
+
+          if (row["Studio Lasadu"]) {
+            totalLasadu += parseFloat(row["Studio Lasadu"]);
+          }
+
+          foundDays++;
+        }
+
+      });
+
+      if (foundDays === 0) {
+        document.getElementById("result").innerHTML =
+          "Nema podataka za odabrane datume.";
+        return;
+      }
+
+      document.getElementById("result").innerHTML =
+        "<b>Studio Economy:</b> " + totalEconomy + " EUR<br>" +
+        "<b>Studio Standard:</b> " + totalStandard + " EUR<br>" +
+        "<b>Studio Lasadu:</b> " + totalLasadu + " EUR<br><br>" +
+        "Boravišna taksa nije uključena (1€ po osobi po noći).";
+
+    });
+
 }
 
 </script>
