@@ -1,1 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cjenovnik</title>
 
+<style>
+body {
+  font-family: Arial;
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+}
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+}
+.result {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Provjera cijene</h2>
+
+<label>Datum dolaska</label>
+<input type="date" id="start">
+
+<label>Datum odlaska</label>
+<input type="date" id="end">
+
+<label>Broj osoba</label>
+<select id="persons">
+  <option value="1">1</option>
+  <option value="2">2</option>
+</select>
+
+<button onclick="getPrice()">Provjeri cijenu</button>
+
+<div class="result" id="result"></div>
+
+<script>
+
+function getPrice() {
+
+  const start = document.getElementById("start").value;
+  const end = document.getElementById("end").value;
+
+  if (!start || !end) {
+    document.getElementById("result").innerHTML = "Unesite datume.";
+    return;
+  }
+
+  // OVDJE ide link ka Google Sheet-u
+  const url = "OVDJE_IDE_TVOJ_LINK";
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+
+      document.getElementById("result").innerHTML =
+        "⚠️ (privremeno) Podaci učitani. Sledeći korak povezivanje logike.";
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
