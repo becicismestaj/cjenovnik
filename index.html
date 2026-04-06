@@ -79,15 +79,15 @@ const endDate = new Date(end);
 if (sheetDate >= startDate && sheetDate < endDate) {
 
           if (row["Studio Economy Guesthouse"]) {
-            totalEconomy += parseFloat(row["Studio Economy Guesthouse"]);
+totalEconomy += parseFloat(row["Studio Economy Guesthouse"].replace("€",""));
           }
 
           if (row["Studio Standard Guesthouse"]) {
-            totalStandard += parseFloat(row["Studio Standard Guesthouse"]);
+totalStandard += parseFloat(row["Studio Standard Guesthouse"].replace("€",""));
           }
 
           if (row["Studio Lasadu"]) {
-            totalLasadu += parseFloat(row["Studio Lasadu"]);
+totalLasadu += parseFloat(row["Studio Lasadu"].replace("€",""));
           }
 
           foundDays++;
