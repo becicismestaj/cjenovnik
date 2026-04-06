@@ -11,7 +11,7 @@ body {
   margin: auto;
   padding: 20px;
 }
-input, button {
+input, select, button {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
@@ -36,38 +36,29 @@ input, button {
 
 <label>Broj osoba</label>
 <select id="persons">
-  <option value="1">1</option>
-  <option value="2">2</option>
+  <option value="1">1 osoba</option>
+  <option value="2">2 osobe</option>
 </select>
 
 <button onclick="getPrice()">Provjeri cijenu</button>
 
-<div class="result" id="result"></div>
+<div class="result" id="result">
+Ovdje će se prikazati cijena.
+</div>
 
 <script>
 
 function getPrice() {
-
   const start = document.getElementById("start").value;
   const end = document.getElementById("end").value;
 
   if (!start || !end) {
-    document.getElementById("result").innerHTML = "Unesite datume.";
+    document.getElementById("result").innerHTML = "Molimo unesite datume.";
     return;
   }
 
-  // OVDJE ide link ka Google Sheet-u
-  const url = "OVDJE_IDE_TVOJ_LINK";
-
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-
-      document.getElementById("result").innerHTML =
-        "⚠️ (privremeno) Podaci učitani. Sledeći korak povezivanje logike.";
-
-    });
-
+  document.getElementById("result").innerHTML =
+    "Forma radi ✔ — sljedeći korak je povezivanje sa Google Sheet-om.";
 }
 
 </script>
